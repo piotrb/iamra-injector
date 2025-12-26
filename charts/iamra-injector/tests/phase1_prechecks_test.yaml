@@ -44,6 +44,8 @@ tests:
     capabilities:
       apiVersions:
         - cert-manager.io/v1
+    release:
+      namespace: iamra-system
     set:
       trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
       region: us-east-1
@@ -81,6 +83,8 @@ tests:
     capabilities:
       apiVersions:
         - cert-manager.io/v1
+    release:
+      namespace: iamra-system
     set:
       trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
       region: us-east-1
@@ -110,6 +114,8 @@ tests:
     capabilities:
       apiVersions:
         - cert-manager.io/v1
+    release:
+      namespace: iamra-system
     set:
       trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
       region: us-east-1

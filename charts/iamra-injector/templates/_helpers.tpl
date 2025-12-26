@@ -20,7 +20,11 @@ Common template helpers for the iamra-injector chart.
 {{- end -}}
 
 {{- define "iamra-injector.namespace" -}}
+{{- if and .Release.Namespace (ne .Release.Namespace "") -}}
+{{- .Release.Namespace -}}
+{{- else -}}
 {{- default "iamra-system" .Values.namespace -}}
+{{- end -}}
 {{- end -}}
 
 {{- define "iamra-injector.webhookServiceName" -}}
