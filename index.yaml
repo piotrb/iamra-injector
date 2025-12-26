@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  iamra-injector:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-12-26T17:24:57.786781018Z"
+    description: IAM Roles Anywhere sidecar injection webhook chart
+    digest: 8372c93d80879673df3283cdc6eac9fc5d8e29c872a9741216a72543d07dac7e
+    name: iamra-injector
+    type: application
+    urls:
+    - https://github.com/piotrb/iamra-injector/releases/download/iamra-injector-0.1.0/iamra-injector-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-12-26T17:24:57.786791587Z"
