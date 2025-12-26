@@ -22,9 +22,9 @@
 - [x] Walk user through renders/tests; get approval before moving forward.
 
 ## Phase 2 – CI/CD: chart publish to gh-pages
-- [ ] GitHub Actions: helm lint + helm-unittest/ct; package chart and publish to gh-pages branch.
-- [ ] Validate workflow locally with `act` or job-level dry runs.
-- [ ] Review workflow plan/results with user; check off after approval.
+- [x] GitHub Actions: helm lint + helm-unittest/ct; package chart and publish to gh-pages branch.
+- [x] Validate workflow locally with `act` or job-level dry runs.
+- [x] Review workflow plan/results with user; check off after approval.
 
 ## Phase 3 – Webhook scaffold + red tests
 - [ ] Scaffold webhook module/handler stub; add red unit tests for mutation contract (namespace gate, required pod annotations, idempotency, validation of overrides).
