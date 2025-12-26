@@ -1,22 +1,7 @@
 name: chart-lint
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "charts/**"
-      - ".github/workflows/chart-lint.yaml"
-      - ".github/ct.yaml"
-      - "Makefile"
-  pull_request:
-    branches: [main]
-    paths:
-      - "charts/**"
-      - ".github/workflows/chart-lint.yaml"
-      - ".github/ct.yaml"
-      - "Makefile"
   workflow_call: {}
-  workflow_dispatch: {}
 
 jobs:
   lint-test:
