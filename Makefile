@@ -12,7 +12,7 @@ helm-unittest-plugin:
 		rm -rf "$$UNITTEST_DIR"; \
 	fi; \
 	if ! $(HELM) plugin list 2>/dev/null | grep -q "^unittest"; then \
-		$(HELM) plugin install https://github.com/helm-unittest/helm-unittest --version $(HELM_UNITTEST_VERSION); \
+		$(HELM) plugin install https://github.com/helm-unittest/helm-unittest --version $(HELM_UNITTEST_VERSION) --verify=false; \
 	fi
 
 .PHONY: helm-test
