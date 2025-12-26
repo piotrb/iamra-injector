@@ -4,15 +4,16 @@
 - Always: draft stubs/tests → show user → get explicit approval → implement → show user before moving forward.
 - Do not merge/continue a phase without user sign-off on tests and on implemented stubs.
 - Never push to any remote (no `git push`).
+- Check off completed tasks in this file before committing a phase.
 - After user confirms a phase, make a local commit for that phase before moving on.
 - Document updates alongside each phase (no deferrals).
 - Prefer automation/CI to generate/publish Helm values/README docs to keep them in sync.
 
 ## Phase 0 – Contracts and Test Plan (paper first)
-- [ ] Finalize values/annotation contract (required `trustAnchorArn`, `region`; opt-in namespace gate; required pod annotations).
-- [ ] Document cainjector + issuer hard requirements; add to spec delta if missing.
-- [ ] Draft test plan: helm render cases (required values, issuer toggles, opt-in gating), webhook handler unit cases, optional envtest smoke.
-- [ ] Review plan with user; check off only after approval.
+- [x] Finalize values/annotation contract (required `trustAnchorArn`, `region`; opt-in namespace gate; required pod annotations).
+- [x] Document cainjector + issuer hard requirements; add to spec delta if missing.
+- [x] Draft test plan: helm render cases (required values, issuer toggles, opt-in gating), webhook handler unit cases, optional envtest smoke.
+- [x] Review plan with user; check off only after approval.
 
 ## Phase 1 – Scaffold + Red Tests
 - [ ] Scaffold chart skeleton: values file, schema stub, templates directory, example values.
