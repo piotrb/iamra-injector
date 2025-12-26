@@ -1,0 +1,5 @@
+{{- /*
+Preflight guards: ensure required values are set and cert-manager/cainjector
+APIs are present before rendering other resources.
+*/ -}}
+{{- template "iamra-injector.prechecks" . -}}

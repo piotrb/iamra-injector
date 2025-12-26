@@ -12,7 +12,7 @@
 - Provide `scripts/update-vendor.sh` to refresh/pin the submodule for builds.
 
 ### Helm Chart
-- New chart `charts/iamra-sidecar`:
+- New chart `charts/iamra-injector`:
   - Annotation-driven injection of IAMRA sidecar (env/volumes) modeled on `cert-manager-self-managed-ca`; opt-in solely via annotations with IAM-RA fields present.
   - Uses cert-manager self-signed `ClusterIssuer` for webhook TLS (default create) and a distinct self-signed `ClusterIssuer` for workload/IAM-RA certs (default create); can point to existing issuers when `create=false`.
   - Templates trust/profile/role ARNs, helper image, ports, volumes, and scheduling (arm64/amd64).
@@ -36,12 +36,12 @@
 - Hello-world example app/chart (Job) that runs `aws sts get-caller-identity` to demonstrate injection and credential flow.
 
 ### Design Reference
-- See `design.md` in this change directory for technical details and values/schema specifics.
+- See `design.md` in this change directory for technical details and values contracts (no separate JSON schema doc required).
 
 ## Impact
 
 ### Affected Capabilities
-- `iamra-sidecar` (new) – annotation-based IAM Roles Anywhere sidecar injection with cert-manager integration.
+- `iamra-injector` (new) – annotation-based IAM Roles Anywhere sidecar injection with cert-manager integration.
 
 ### Affected Infrastructure
 - cert-manager ClusterIssuer usage for webhook TLS.
@@ -57,7 +57,7 @@
 ## Deliverables
 1) OpenSpec change directory with proposal/tasks/spec deltas.
 2) Pinned vendor submodule + update script.
-3) Helm chart `charts/iamra-sidecar` with ClusterIssuer support and annotation-based injection.
+3) Helm chart `charts/iamra-injector` with ClusterIssuer support and annotation-based injection.
 4) Mutating webhook manifests with cert-manager-issued self-signed TLS (cainjector required for CA bundle).
 5) Sync/refresh script for chart assets from upstream.
 6) GitHub Actions for GHCR multi-arch builds and chart publish (plus helper fallback if needed).
@@ -66,7 +66,7 @@
 ## Planned Tasks (gist, not yet executing)
 - Scaffold spec delta/design (if needed) under `openspec/changes/add-iamra-helm-webhook/`.
 - Add vendor submodule and `scripts/update-vendor.sh`.
-- Scaffold `charts/iamra-sidecar` with values for ARNs/images/ports/volumes and arm64/amd64 scheduling.
+- Scaffold `charts/iamra-injector` with values for ARNs/images/ports/volumes and arm64/amd64 scheduling.
 - Add mutating webhook (Deployment/Service/MutatingWebhookConfiguration) using cert-manager self-signed ClusterIssuer TLS and CA bundle injection via cainjector; expose tunables via values; fail fast when cainjector or issuers are unavailable.
 - Add `scripts/refresh-chart-from-vendor.sh` to copy upstream assets.
 - Add GH Actions for multi-arch GHCR image build and gh-pages chart publish; optional helper-image fallback.

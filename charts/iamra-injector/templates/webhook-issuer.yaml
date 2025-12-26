@@ -1,0 +1,9 @@
+{{- if .Values.webhook.issuer.create }}
+apiVersion: cert-manager.io/v1
+kind: {{ default "Issuer" .Values.webhook.issuer.type }}
+metadata:
+  name: {{ .Values.webhook.issuer.name }}
+  namespace: {{ include "iamra-injector.namespace" . }}
+spec:
+  selfSigned: {}
+{{- end }}

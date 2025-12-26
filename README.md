@@ -11,12 +11,12 @@ Helm-driven mutating webhook that injects the IAM Roles Anywhere (IAMRA) sidecar
 - Example/hello-world job planned to demonstrate `aws sts get-caller-identity` with the injected sidecar.
 
 ## Status
-Design and tasks are tracked in `openspec/changes/add-iamra-helm-webhook/` (proposal, design, tasks, values schema). Implementation is being staged phase-by-phase with tests before code.
+Design and tasks are tracked in `openspec/changes/add-iamra-helm-webhook/` (proposal, design, tasks). Implementation is being staged phase-by-phase with tests before code.
 
 ## Repo layout (relevant parts)
 - `openspec/` – project context and the OpenSpec change for this work.
 - `vendor/aws-iam-ra-for-kubernetes/` – upstream sample assets kept as a submodule for reference/copying.
-- (Planned) `charts/iamra-sidecar/` – Helm chart for the webhook, issuers, and example job.
+- (Planned) `charts/iamra-injector/` – Helm chart for the webhook, issuers, and example job.
 - (Planned) `scripts/` – vendor/refresh and chart/publish helpers.
 
 ## Prerequisites (intended)

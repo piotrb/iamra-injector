@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.webhook.certificate.name }}
+  namespace: {{ include "iamra-injector.namespace" . }}
+spec:
+  secretName: {{ .Values.webhook.certificate.name }}
+  dnsNames:
+    {{- $defaultDns := printf "%s.%s.svc" (include "iamra-injector.webhookServiceName" .) (include "iamra-injector.namespace" .) -}}
+    {{- $names := .Values.webhook.certificate.dnsNames }}
+    {{- if or (not $names) (eq (len $names) 0) }}
+    - {{ $defaultDns }}
+    {{- else }}
+    {{- range $names }}
+    - {{ . }}
+    {{- end }}
+    {{- end }}
+  issuerRef:
+    name: {{ .Values.webhook.issuer.name }}
+    kind: {{ default "Issuer" .Values.webhook.issuer.type }}

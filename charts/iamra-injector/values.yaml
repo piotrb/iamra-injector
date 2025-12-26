@@ -1,0 +1,38 @@
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: iamra-system
+
+# REQUIRED: IAM Roles Anywhere trust anchor ARN
+trustAnchorArn: ""
+
+# REQUIRED: AWS region for IAM Roles Anywhere (regional service endpoint)
+region: ""
+
+namespaceOptIn:
+  enabled: true
+  annotationKey: iamra.aws/enable
+  annotationValue: "true"
+
+webhook:
+  issuer:
+    create: true
+    type: Issuer
+    name: iamra-webhook-selfsigned
+  certificate:
+    name: iamra-webhook-tls
+    dnsNames: []
+  image:
+    repository: ghcr.io/piotrb/iamra-injector
+    tag: ""
+    pullPolicy: IfNotPresent
+  service:
+    port: 443
+    targetPort: 8443
+
+workloadIssuer:
+  create: true
+  type: ClusterIssuer
+  name: iamra-workload-selfsigned
+  duration: 2160h   # 90d
+  renewBefore: 720h # 30d

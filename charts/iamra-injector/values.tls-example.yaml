@@ -1,0 +1,21 @@
+# Example values for Phase 1 TLS and issuer scaffolding
+namespace: iamra-system
+trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
+region: us-east-1
+
+webhook:
+  issuer:
+    create: true
+    type: Issuer
+    name: iamra-webhook-selfsigned
+  certificate:
+    name: iamra-webhook-tls
+    dnsNames:
+      - iamra-webhook.iamra-system.svc
+
+workloadIssuer:
+  create: true
+  type: ClusterIssuer
+  name: iamra-workload-selfsigned
+  duration: 2160h
+  renewBefore: 720h

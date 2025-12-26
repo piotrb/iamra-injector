@@ -1,0 +1,130 @@
+suite: phase1-prechecks
+templates:
+  - templates/00-prechecks.yaml
+  - templates/webhook-certificate.yaml
+  - templates/webhook-issuer.yaml
+  - templates/workload-clusterissuer.yaml
+tests:
+  - it: fails when trustAnchorArn is empty
+    capabilities:
+      apiVersions:
+        - cert-manager.io/v1
+    set:
+      region: us-east-1
+    asserts:
+      - failedTemplate:
+          template: templates/00-prechecks.yaml
+          errorMessage: trustAnchorArn is required
+
+  - it: fails when region is empty
+    capabilities:
+      apiVersions:
+        - cert-manager.io/v1
+    set:
+      trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
+    asserts:
+      - failedTemplate:
+          template: templates/00-prechecks.yaml
+          errorMessage: region is required
+
+  - it: fails when cert-manager APIs (cainjector) are missing
+    set:
+      trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
+      region: us-east-1
+    capabilities:
+      apiVersions: []
+    asserts:
+      - failedTemplate:
+          template: templates/00-prechecks.yaml
+          errorMessage: "cert-manager (including cainjector) is required: cert-manager.io/v1 APIs not detected"
+
+  - it: renders issuers and certificate with defaults
+    templates:
+      - templates/webhook-certificate.yaml
+    capabilities:
+      apiVersions:
+        - cert-manager.io/v1
+    set:
+      trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
+      region: us-east-1
+    asserts:
+      - hasDocuments:
+          count: 1
+      - equal:
+          documentIndex: 0
+          path: kind
+          value: Certificate
+      - equal:
+          documentIndex: 0
+          path: metadata.name
+          value: iamra-webhook-tls
+      - equal:
+          documentIndex: 0
+          path: metadata.namespace
+          value: iamra-system
+      - equal:
+          documentIndex: 0
+          path: spec.dnsNames[0]
+          value: iamra-webhook.iamra-system.svc
+      - equal:
+          documentIndex: 0
+          path: spec.issuerRef.name
+          value: iamra-webhook-selfsigned
+      - equal:
+          documentIndex: 0
+          path: spec.issuerRef.kind
+          value: Issuer
+
+  - it: renders webhook issuer with defaults
+    templates:
+      - templates/webhook-issuer.yaml
+    capabilities:
+      apiVersions:
+        - cert-manager.io/v1
+    set:
+      trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
+      region: us-east-1
+    asserts:
+      - hasDocuments:
+          count: 1
+      - equal:
+          documentIndex: 0
+          path: kind
+          value: Issuer
+      - equal:
+          documentIndex: 0
+          path: metadata.name
+          value: iamra-webhook-selfsigned
+      - equal:
+          documentIndex: 0
+          path: metadata.namespace
+          value: iamra-system
+      - equal:
+          documentIndex: 0
+          path: spec.selfSigned
+          value: {}
+
+  - it: renders workload clusterissuer with defaults
+    templates:
+      - templates/workload-clusterissuer.yaml
+    capabilities:
+      apiVersions:
+        - cert-manager.io/v1
+    set:
+      trustAnchorArn: arn:aws:rolesanywhere:us-east-1:123456789012:trust-anchor/abcd1234
+      region: us-east-1
+    asserts:
+      - hasDocuments:
+          count: 1
+      - equal:
+          documentIndex: 0
+          path: kind
+          value: ClusterIssuer
+      - equal:
+          documentIndex: 0
+          path: metadata.name
+          value: iamra-workload-selfsigned
+      - equal:
+          documentIndex: 0
+          path: spec.selfSigned
+          value: {}

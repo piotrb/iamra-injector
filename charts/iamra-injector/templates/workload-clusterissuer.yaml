@@ -1,0 +1,11 @@
+{{- if .Values.workloadIssuer.create }}
+apiVersion: cert-manager.io/v1
+kind: {{ default "ClusterIssuer" .Values.workloadIssuer.type }}
+metadata:
+  name: {{ .Values.workloadIssuer.name }}
+  {{- if eq (default "ClusterIssuer" .Values.workloadIssuer.type) "Issuer" }}
+  namespace: {{ include "iamra-injector.namespace" . }}
+  {{- end }}
+spec:
+  selfSigned: {}
+{{- end }}

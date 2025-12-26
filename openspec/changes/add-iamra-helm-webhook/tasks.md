@@ -16,10 +16,10 @@
 - [x] Review plan with user; check off only after approval.
 
 ## Phase 1 – Helm bootstrap (cainjector check + issuers only)
-- [ ] Scaffold chart skeleton: values file, schema stub, templates directory, example values focused on TLS/issuer pieces.
-- [ ] Red helm render/unit tests: fail without cainjector; fail when required values (`trustAnchorArn`, `region`) are unset; render webhook Issuer/Certificate (service DNS SAN) and workload ClusterIssuer.
-- [ ] Implement minimal templates: Helm `fail` guard for cainjector, webhook `Issuer` + serving `Certificate`, workload `ClusterIssuer`; no webhook Deployment/Service yet.
-- [ ] Walk user through renders/tests; get approval before moving forward.
+- [x] Scaffold chart skeleton: values file, schema stub, templates directory, example values focused on TLS/issuer pieces.
+- [x] Red helm render/unit tests: fail without cainjector; fail when required values (`trustAnchorArn`, `region`) are unset; render webhook Issuer/Certificate (service DNS SAN) and workload ClusterIssuer.
+- [x] Implement minimal templates: Helm `fail` guard for cainjector, webhook `Issuer` + serving `Certificate`, workload `ClusterIssuer`; no webhook Deployment/Service yet.
+- [x] Walk user through renders/tests; get approval before moving forward.
 
 ## Phase 2 – CI/CD: chart publish to gh-pages
 - [ ] GitHub Actions: helm lint + helm-unittest/ct; package chart and publish to gh-pages branch.

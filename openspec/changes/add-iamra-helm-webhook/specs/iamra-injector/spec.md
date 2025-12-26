@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
-### Requirement: Helm packaging for IAMRA sidecar
-The system SHALL provide a Helm chart `iamra-sidecar` that packages the IAM Roles Anywhere sidecar pattern and supports annotation-driven injection.
+### Requirement: Helm packaging for IAMRA injector
+The system SHALL provide a Helm chart `iamra-injector` that packages the IAM Roles Anywhere sidecar pattern and supports annotation-driven injection.
 
 #### Scenario: Rendered chart
 - WHEN the chart is rendered with default values
