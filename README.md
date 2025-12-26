@@ -13,6 +13,16 @@ Helm-driven mutating webhook that injects the IAM Roles Anywhere (IAMRA) sidecar
 ## Status
 Design and tasks are tracked in `openspec/changes/add-iamra-helm-webhook/` (proposal, design, tasks). Implementation is being staged phase-by-phase with tests before code.
 
+## Helm chart install (current flow)
+- Ensure cert-manager **with cainjector** is installed and the IAMRA trust anchor/role/profile exist.
+- Add the chart repo (published from this repo’s `gh-pages`):  
+  `helm repo add iamra-injector https://piotrb.github.io/iamra-injector`  
+  `helm repo update`
+- Install with required values (trust anchor ARN and region) and the default namespace:  
+  `helm install iamra iamra-injector/iamra-injector --namespace iamra-system --create-namespace --set trustAnchorArn=<your-trust-anchor-arn> --set region=<aws-region>`
+- Optional: use `charts/iamra-injector/values.tls-example.yaml` as a starting point for issuer/TLS settings.
+- Namespace opt-in is enabled by default via annotation `iamra.aws/enable: "true"`; workloads still must carry the required IAMRA annotations to be mutated.
+
 ## Repo layout (relevant parts)
 - `openspec/` – project context and the OpenSpec change for this work.
 - `vendor/aws-iam-ra-for-kubernetes/` – upstream sample assets kept as a submodule for reference/copying.
