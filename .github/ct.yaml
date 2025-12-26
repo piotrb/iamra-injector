@@ -1,0 +1,4 @@
+chart-dirs:
+  - charts
+helm-extra-args: "--api-versions cert-manager.io/v1 -f charts/iamra-injector/values.tls-example.yaml --strict"
+target-branch: main

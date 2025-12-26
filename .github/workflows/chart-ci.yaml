@@ -1,0 +1,38 @@
+name: chart-ci
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "charts/**"
+      - ".github/workflows/chart-ci.yaml"
+      - ".github/workflows/chart-lint.yaml"
+      - ".github/ct.yaml"
+      - "Makefile"
+
+jobs:
+  lint-test:
+    uses: ./.github/workflows/chart-lint.yaml
+
+  release:
+    needs: lint-test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        env:
+          CR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          charts_dir: charts
+          charts_repo_url: "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"

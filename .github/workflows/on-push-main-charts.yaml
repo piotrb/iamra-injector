@@ -1,0 +1,15 @@
+name: on-push-main-charts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "charts/**"
+      - ".github/workflows/on-push-main-charts.yaml"
+      - ".github/workflows/chart-lint.yaml"
+      - ".github/ct.yaml"
+      - "Makefile"
+
+jobs:
+  lint-test:
+    uses: ./.github/workflows/chart-lint.yaml
