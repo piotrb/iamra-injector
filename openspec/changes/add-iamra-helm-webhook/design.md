@@ -8,6 +8,7 @@
 ## Components
 - Namespace: default `iamra-system`; `MutatingWebhookConfiguration` is cluster-scoped; Deployment/Service/Issuer/Certificate live in `iamra-system`. Chart relies on Helm/Argo `createNamespace` if needed.
 - Webhook: Service DNS `iamra-webhook.iamra-system.svc`; Deployment built with kubewebhook v2 (mutating handler), default framework logging, checksum-based rollout on CA/config changes.
+- Webhook image: built from `github.com/piotrb/iamra-injector`, published as multi-arch to `ghcr.io/piotrb/iamra-injector`.
 - Issuers/TLS:
   - Webhook: self-signed namespaced `Issuer` (`iamra-webhook-selfsigned`) issuing a serving `Certificate` for the Service; CA secret in `iamra-system`; CABundle injected via cainjector.
   - Workload: self-signed `ClusterIssuer` (`iamra-workload-selfsigned`), duration 90d, renew-before 30d.
@@ -65,4 +66,4 @@
 ## Open items / future-ready
 - Allow webhook ClusterIssuer toggle if cross-namespace CA sharing is required.
 - Allow workload namespaced Issuer mode if operators prefer per-namespace issuance.
-- Finalize GHCR repo/name/tag policy and multi-arch build pipeline.
+- Multi-arch pipeline must publish webhook image from `github.com/piotrb/iamra-injector` to `ghcr.io/piotrb/iamra-injector` (tag policy still to finalize).

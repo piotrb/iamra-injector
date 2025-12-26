@@ -1,6 +1,7 @@
 # Phase 0 – Contracts and Test Plan (draft for approval)
 
 This document captures the proposed value/annotation contract, issuer and cainjector requirements, and the initial test plan for Helm renders and webhook handler logic. Nothing is implemented yet.
+Webhook code/image lives in `https://github.com/piotrb/iamra-injector` with GHCR target `ghcr.io/piotrb/iamra-injector`.
 
 ## Contract summary
 - Required chart values: `trustAnchorArn`, `region` (regional IAM RA endpoint). No annotation fallback for either.

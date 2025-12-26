@@ -45,7 +45,7 @@
 - [ ] Show rendered outputs/tests to user; check off after approval.
 
 ## Phase 6 – CI/CD Early Enablement (needed for Phase 6 deploy)
-- [ ] GitHub Actions: multi-arch GHCR build/push for webhook; chart lint/test (helm lint + helm-unittest/ct) gated before publish to gh-pages; optional helper image build only if strictly required.
+- [ ] GitHub Actions: multi-arch GHCR build/push for webhook from `github.com/piotrb/iamra-injector` to `ghcr.io/piotrb/iamra-injector`; chart lint/test (helm lint + helm-unittest/ct) gated before publish to gh-pages; optional helper image build only if strictly required.
 - [ ] Validate workflows locally with `act` or at least job-level verification steps.
 - [ ] Review workflow plan/results with user; check off after approval.
 
